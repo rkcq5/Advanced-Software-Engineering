@@ -148,7 +148,7 @@ input[type=submit]:active {
                 <center><input type="button" value="Login" onClick="check()"></center>
                 <br>
                 
-                <center><label>New User?</label><br><br><input type="button" value="Register" onclick="location.href='register.html'"></center>
+                <p id="demo"></p><br><br>
             </div><!--/ lower-->
         </form>
     </div><!--/ container-->
@@ -159,13 +159,9 @@ input[type=submit]:active {
 function check() {
     var username= document.getElementById("username").value;
     var password= document.getElementById("password").value;
-    
-     if((username=='raviteja')&&(password='ravi'))
-    {
-        alert("Match");
-        window.location.href = 'Home.html';
-
-    }
-
+         
+    localStorage.setItem("Name",username);
+    document.getElementById("demo").innerHTML = "<center><b>WELCOME"+" "+username+"</b></center>";
+       location.href="welcomepage.html";
 }
 </script>
