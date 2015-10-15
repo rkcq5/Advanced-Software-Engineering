@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="" data-ng-app="GoogleDirection">
+<head>
+<meta t="utf-8">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<title>Angular Demo</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js" type="application/javascript"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+  <script src="http://cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
+<meta charset=utf-8 />
+    <style>
+        
+    #pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 300px;
+}
+
+    #pac-input:focus {
+  border-color: #4d90fe;
+}
+
+    .pac-container {
+  font-family: Roboto;
+}
+    
+        #lineexample {
+        max-width: 500px;
+            background-color:#b7f6f8;
+    }
+    </style>
+</head>
+
+<body>
+ <input id="pac-input" class="controls" type="text"
+        placeholder="Enter a location">
+    <div class="wrapp" ng-controller="googlemapoutput">
+               <button id="btnweather" ng-click="getWeather()"> Get Weather </button >
+    </div>
+     <div id="lineexample"></div>
+
+    
+</body>
+</html>
+
+<script>
+  
+
+    angular.module('GoogleDirection', [])
+    .controller('googlemapoutput', function ($scope,$http) {
+  
+        $scope.getWeather = function() {       
+       var location = document.getElementById("pac-input").value;
+            //alert(location);
+        $http.get('http://api.openweathermap.org/data/2.5/forecast/daily?q='+location+'&mode=json&units=metric&cnt=7&appid=6592931011456bf7e824174e29720be8')
+         .success(function(sourcedata){
+          
+            lineexample.innerHTML="";
+            
+            var cityName = sourcedata.city.name;
+            var longitude = sourcedata.city.coord.lon;
+            var latitude = sourcedata.city.coord.lat;
+            var myArray = [];
+           
+            for(var i=0;i<sourcedata.list.length;i++)
+                {
+                    myArray.push({           
+                    dt: timeConverter(sourcedata.list[i].dt),
+                    min:sourcedata.list[i].temp.min,
+                    max:sourcedata.list[i].temp.max,
+                   //humidity:sourcedata.list[i].humidity
+                    Main:sourcedata.list[i].weather[0].main
+                    });
+//                 alert(myArray[i]);
+                 }
+    graph(myArray);   
+   
+    function timeConverter(UNIX_timestamp)
+            {
+         var date = new Date(UNIX_timestamp*1000);
+
+//date = new Date(date.setMonth(date.getMonth() + 1)*1000);
+       // var date = new Date(unix_timestamp*1000);
+// hours part from the timestamp
+var years = date.getFullYear();
+// minutes part from the timestamp
+var month = date.getMonth() +1;
+              //  alert(month);
+// seconds part from the timestamp
+var mydate = date.getDate();
+// will display time in 10:30:23 format
+var formattedTime = years + '-' + month + '-' + mydate;        
+                                
+                return ''+formattedTime+'';   
+            }
+     
+function graph(myArray)
+{
+ Morris.Line({
+  element:'lineexample',
+  data: myArray,
+  xkey:"dt",
+  ykeys: ['min', 'max'],
+     lineColors:['black','black'],
+ labels: ['Minimum', 'Maximum','Main']
+});    
+            }
+            console.log(sourcedata);
+        })       
+.error(function(error){
+       alert(error);
+        })
+    };    
+    
+        google.maps.event.addDomListener(window, 'load', $scope.initialize);
+
+    });
+</script>

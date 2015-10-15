@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="" data-ng-app="myApp">
+<head>
+  <meta t="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js" type="application/javascript"></script>  
+  <script src="js/appdisplay.js"></script>
+<!--  <link rel="stylesheet" href="css/main.css"> -->
+<!--   <link href="lib/ionic/css/ionic.css" rel="stylesheet">-->
+<!--    <link href="css/style.css" rel="stylesheet">-->
+    <h1>Display Page</h1>
+</head>
+    
+<body>
+<div  ng-controller="displayController">
+        
+<form>
+<table>
+  <tr>
+    <td>User Name</td>
+    <td><input type="text" name="userName" id="userName" data-ng-model="userName"/></td>
+  </tr>
+<!--
+  <tr>
+    <td>Password</td>
+    <td><input type="password" name="password" id="password" data-ng-model="password"/></td>
+  </tr>
+-->
+<!--
+  <tr>
+    <td>Email Address</td>
+    <td><input type="text" name="email" id="email" data-ng-model="email"/></td>
+  </tr>
+-->
+    
+</table><br/>
+<!--   <button id="login" name="login" ng_click="login(userName, password, email)">login</button>-->
+<button id="display" name="display" ng_click="display(userName)">display</button>
+    </form>
+   
+    <br/>
+    <div id="displaydetails"></div>    
+</div>
+
+ </body>
+</html>
