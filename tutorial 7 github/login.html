@@ -1,6 +1,8 @@
 <!DOCTYPE html>
+<input type="hidden" name="http_method" value="DELETE" />
 <html lang="" data-ng-app="myApp">
 <head>
+<!--    <Access-Control-Allow-Method: Delete></Access-Control-Allow-Method>-->
   <meta t="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Page</title>
@@ -35,6 +37,7 @@
 </table><br/>
    <button id="login" name="login" ng_click="login(userName, password)">login</button>
 <button id="register" name="register" ng_click="register()">register</button>
+<button id="delete" name="delete" ng_click="delete(userName, password)">delete</button>
     </form>
    
     <br/>
