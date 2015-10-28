@@ -8,11 +8,11 @@ $scope.register = function(username, fullname, password, email) {
    console.log("inside login function");
 $http({
     method: 'POST',
-    url : 'https://api.mongolab.com/api/1/databases/aseproject/collections/users?apiKey=56jTCYNFDRT3b7ebHGJ_suJCl0CbM2OQ',
+    url : '',
     data: JSON.stringify({
-                name: username,
-               fullname:fullname,
- 		password: password,
+             name: username,
+             fullname:fullname,
+ 		     password: password,
                 email: email
 
             }),
