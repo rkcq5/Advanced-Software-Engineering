@@ -1,6 +1,6 @@
 var services = angular.module("mongoapp.services", []);
 
-var url = "http://ravibluemixproject.mybluemix.net/";
+var url = "http://localhost:9080/test/userServlet";
 
 services.factory('MongoRESTService', function($http) {
     return {
